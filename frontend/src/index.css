@@ -16,3 +16,9 @@ a, a:hover, a:visited {
   color: unset;
   text-decoration: none;
 }
+
+header {
+  
+  height: 220px;
+  
+}

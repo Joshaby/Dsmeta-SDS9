@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import icon from './../assets/img/notification-icon.svg'
+
+import icon from '../assets/img/notification-icon.svg'
 
 const Button = styled.div`
   height: 45px;
