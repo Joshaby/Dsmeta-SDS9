@@ -63,7 +63,7 @@ const ButtonContainer = styled.div`
 `
 
 export function SalesCard() {
-  const [minDate, setMinDate] = useState(new Date().setDate(new Date().getDate() - 365));
+  const [minDate, setMinDate] = useState(new Date(new Date().setDate(new Date().getDate() - 365)));
   const [maxDate, setMaxDate] = useState(new Date());
   
   return (
