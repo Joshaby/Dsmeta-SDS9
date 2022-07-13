@@ -1,7 +1,8 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import { NotificationButton } from "./NotificationButton"
 import ReactDatePicker from "react-datepicker";
+import { useState } from "react";
 
 const Card = styled.div`
   background-color: #283142;
@@ -62,23 +63,26 @@ const ButtonContainer = styled.div`
 `
 
 export function SalesCard() {
+  const [minDate, setMinDate] = useState(new Date().setDate(new Date().getDate() - 365));
+  const [maxDate, setMaxDate] = useState(new Date());
+  
   return (
     <Card>
       <SalesTitle>Vendas</SalesTitle>
       <div>
         <FormControlContainer>
           <Input
-            selected={new Date()}
-            onChange={(date: Date) => {}}
+            selected={minDate}
+            onChange={(date: Date) => setMinDate(date)}
             dateFormat="dd/MM/yyyy"
           />
         </FormControlContainer>
         <FormControlContainer>
-        <Input
-          selected={new Date()}
-          onChange={(date: Date) => {}}
-          dateFormat="dd/MM/yyyy"
-        />
+          <Input
+            selected={maxDate}
+            onChange={(date: Date) => setMaxDate(date)}
+            dateFormat="dd/MM/yyyy"
+          />
         </FormControlContainer>
       </div>
       <div>
