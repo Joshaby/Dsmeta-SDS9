@@ -1,5 +1,7 @@
 import styled from "styled-components"
+import "react-datepicker/dist/react-datepicker.css";
 import { NotificationButton } from "./NotificationButton"
+import ReactDatePicker from "react-datepicker";
 
 const Card = styled.div`
   background-color: #283142;
@@ -18,7 +20,7 @@ const FormControlContainer = styled.div`
   max-width: 300px;
 `
 
-const Input = styled.input`
+const Input = styled(ReactDatePicker)`
   width: 100%;
   height: 46px;
   background-color: #1B2531;
@@ -65,10 +67,18 @@ export function SalesCard() {
       <SalesTitle>Vendas</SalesTitle>
       <div>
         <FormControlContainer>
-          <Input type="text" />
+          <Input
+            selected={new Date()}
+            onChange={(date: Date) => {}}
+            dateFormat="dd/MM/yyyy"
+          />
         </FormControlContainer>
         <FormControlContainer>
-          <Input type="text" />
+        <Input
+          selected={new Date()}
+          onChange={(date: Date) => {}}
+          dateFormat="dd/MM/yyyy"
+        />
         </FormControlContainer>
       </div>
       <div>
