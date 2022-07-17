@@ -1,6 +1,8 @@
+import axios from 'axios'
 import styled from 'styled-components'
 
 import icon from '../assets/img/notification-icon.svg'
+import { BASE_URL } from '../utils/request'
 
 const Button = styled.div`
   height: 45px;
@@ -17,9 +19,20 @@ const Button = styled.div`
   }
 `
 
-export function NotificationButton() {
+type Props = {
+  saleId: number
+}
+
+function handleClick(saleId: number) {
+  axios.get(`${BASE_URL}/sales/${saleId}/notification`)
+    .then(response => {
+      console.log(saleId);
+    });
+}
+
+export function NotificationButton({ saleId } : Props) {
   return (
-    <Button>
+    <Button onClick={() => handleClick(saleId)}>
       <img src={icon} alt="Notificar"/>
     </Button>
   )

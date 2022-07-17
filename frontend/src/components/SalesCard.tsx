@@ -125,7 +125,7 @@ export function SalesCard() {
                   <td>R$ {sale.amount.toFixed(2)}</td>
                   <td>
                     <ButtonContainer>
-                      <NotificationButton />
+                      <NotificationButton saleId={sale.id}/>
                     </ButtonContainer>
                   </td>
                 </tr>
