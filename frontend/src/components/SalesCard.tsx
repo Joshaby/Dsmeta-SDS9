@@ -73,13 +73,13 @@ export function SalesCard() {
   const [sales, setSales] = useState<Sale[]>();
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/sales`)
+    const min = minDate.toISOString().slice(0, 10);
+    const max = maxDate.toISOString().slice(0, 10);
+    axios.get(`${BASE_URL}/sales?minDate=${min}&maxDate=${max}`)
       .then(response => {
         setSales(response.data?.content);
       });
-  }, [])
-
-  console.log(sales);
+  }, [minDate, maxDate]);
   
   return (
     <Card>
