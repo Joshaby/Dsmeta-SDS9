@@ -4,6 +4,8 @@ import { NotificationButton } from "./NotificationButton"
 import ReactDatePicker from "react-datepicker";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/request";
+import { Sale } from "../models/sale";
 
 const Card = styled.div`
   background-color: #283142;
@@ -65,14 +67,19 @@ const ButtonContainer = styled.div`
 
 export function SalesCard() {
   const [minDate, setMinDate] = useState(new Date(new Date().setDate(new Date().getDate() - 365)));
+
   const [maxDate, setMaxDate] = useState(new Date());
 
+  const [sales, setSales] = useState<Sale[]>();
+
   useEffect(() => {
-    axios.get("http://localhost:8080/sales")
+    axios.get(`${BASE_URL}/sales`)
       .then(response => {
-        console.log(response.data);
+        setSales(response.data?.content);
       });
-  }, [minDate])
+  }, [])
+
+  console.log(sales);
   
   return (
     <Card>
@@ -107,45 +114,23 @@ export function SalesCard() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>#341</td>
-              <td>28/06/2022</td>
-              <td>Anakin</td>
-              <td>15</td>
-              <td>11</td>
-              <td>R$ 55300.00</td>
-              <td>
-                <ButtonContainer>
-                  <NotificationButton />
-                </ButtonContainer>
-              </td>
-            </tr>
-            <tr>
-              <td>#341</td>
-              <td>28/06/2022</td>
-              <td>Anakin</td>
-              <td>15</td>
-              <td>11</td>
-              <td>R$ 55300.00</td>
-              <td>
-                <ButtonContainer>
-                  <NotificationButton />
-                </ButtonContainer>
-              </td>
-            </tr>
-            <tr>
-              <td>#341</td>
-              <td>28/06/2022</td>
-              <td>Anakin</td>
-              <td>15</td>
-              <td>11</td>
-              <td>R$ 55300.00</td>
-              <td>
-                <ButtonContainer>
-                  <NotificationButton />
-                </ButtonContainer>
-              </td>
-            </tr>
+            {sales?.map((sale: Sale) => {
+              return (
+                <tr key={sale.id}>
+                  <td>{sale.id}</td>
+                  <td>{new Date(sale.date).toLocaleDateString()}</td>
+                  <td>{sale.sellerName}</td>
+                  <td>{sale.visited}</td>
+                  <td>{sale.deals}</td>
+                  <td>R$ {sale.amount.toFixed(2)}</td>
+                  <td>
+                    <ButtonContainer>
+                      <NotificationButton />
+                    </ButtonContainer>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
       </div>
