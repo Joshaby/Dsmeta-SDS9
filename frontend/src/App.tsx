@@ -1,6 +1,9 @@
+import { ToastContainer } from "react-toastify"
 import styled from "styled-components"
 import { Header } from "./components/Header"
 import { SalesCard } from "./components/SalesCard"
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
   width: 100%;
@@ -15,6 +18,7 @@ const Sales = styled.section`
 export function App() {
   return (
     <>
+      <ToastContainer />
       <Header />
       <main>
         <Sales>
